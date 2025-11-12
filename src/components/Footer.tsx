@@ -1,8 +1,6 @@
 import { Camera } from "lucide-react";
-
 const Footer = () => {
-  return (
-    <footer className="bg-primary text-primary-foreground py-12">
+  return <footer className="bg-primary text-primary-foreground py-12">
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
@@ -45,12 +43,12 @@ const Footer = () => {
             <ul className="space-y-2 text-primary-foreground/80">
               <li>
                 <a href="mailto:hello@moodfotografie.de" className="hover:text-accent transition-colors">
-                  hello@moodfotografie.de
+                  business@moodfotografie.de
                 </a>
               </li>
               <li>
                 <a href="tel:+4930123456789" className="hover:text-accent transition-colors">
-                  +49 30 123 456 789
+                  +49 151 23 00 86 36            
                 </a>
               </li>
               <li>Berlin, Deutschland</li>
@@ -63,8 +61,6 @@ const Footer = () => {
           <p>© {new Date().getFullYear()} Moodfotografie. Efi & Moritz. Alle Rechte vorbehalten.</p>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
