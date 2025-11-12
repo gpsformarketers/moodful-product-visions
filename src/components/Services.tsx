@@ -1,5 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Camera, ShoppingCart, Package } from "lucide-react";
+import { useState } from "react";
 import serviceAmazon from "@/assets/service-amazon.jpg";
 import serviceEcommerce from "@/assets/service-ecommerce.jpg";
 import serviceVersand from "@/assets/service-versand.jpg";
@@ -26,6 +28,8 @@ const services = [
 ];
 
 const Services = () => {
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
   return (
     <section className="py-20 bg-background" id="services">
       <div className="container mx-auto px-4">
@@ -44,17 +48,28 @@ const Services = () => {
               key={index} 
               className="overflow-hidden border-border hover:shadow-xl transition-all duration-300 group"
             >
-              <div className="relative h-64 overflow-hidden">
-                <img 
-                  src={service.image} 
-                  alt={service.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent" />
-                <div className="absolute bottom-4 left-4">
-                  <service.icon className="h-10 w-10 text-primary-foreground" />
-                </div>
-              </div>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <div className="relative h-64 overflow-hidden cursor-pointer">
+                    <img 
+                      src={service.image} 
+                      alt={service.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent" />
+                    <div className="absolute bottom-4 left-4">
+                      <service.icon className="h-10 w-10 text-primary-foreground" />
+                    </div>
+                  </div>
+                </DialogTrigger>
+                <DialogContent className="max-w-6xl w-full p-0">
+                  <img 
+                    src={service.image} 
+                    alt={service.title}
+                    className="w-full h-auto object-contain max-h-[90vh]"
+                  />
+                </DialogContent>
+              </Dialog>
               
               <CardContent className="p-6">
                 <h3 className="font-display text-2xl font-semibold mb-3 text-foreground">
