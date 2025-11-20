@@ -40,7 +40,7 @@ function detectSpam(data: ContactEmailRequest): boolean {
   }
   
   // Check for very short messages (likely spam)
-  if (message.trim().length < 10) {
+  if (message.trim().length < 5) {
     return true;
   }
   
