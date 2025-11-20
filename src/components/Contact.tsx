@@ -24,15 +24,31 @@ const Contact = () => {
     message: ""
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
     try {
       contactSchema.parse(formData);
       setErrors({});
+      setIsSubmitting(true);
+
+      const { supabase } = await import("@/integrations/supabase/client");
+      
+      const { error } = await supabase.functions.invoke('send-contact-email', {
+        body: formData
+      });
+
+      if (error) {
+        throw error;
+      }
+
       toast({
         title: "Nachricht gesendet!",
         description: "Wir melden uns innerhalb von 24 Stunden bei dir."
       });
+      
       setFormData({
         name: "",
         email: "",
@@ -48,7 +64,15 @@ const Contact = () => {
           }
         });
         setErrors(newErrors);
+      } else {
+        toast({
+          title: "Fehler",
+          description: "Nachricht konnte nicht gesendet werden. Bitte versuche es später erneut.",
+          variant: "destructive"
+        });
       }
+    } finally {
+      setIsSubmitting(false);
     }
   };
   return <section className="py-20 bg-gradient-to-br from-muted/30 to-background" id="contact">
@@ -142,7 +166,14 @@ const Contact = () => {
                     {errors.message && <p className="text-sm text-destructive">{errors.message}</p>}
                   </div>
 
-                  <Button type="submit" size="lg" className="w-full bg-primary text-primary-foreground hover:bg-primary/90">Angebot anfordern<Send className="ml-2 h-5 w-5" />
+                  <Button 
+                    type="submit" 
+                    size="lg" 
+                    className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? "Wird gesendet..." : "Angebot anfordern"}
+                    <Send className="ml-2 h-5 w-5" />
                   </Button>
                 </form>
               </CardContent>
