@@ -8,12 +8,12 @@ import portfolio5 from "@/assets/portfolio-5.jpg";
 import portfolio6 from "@/assets/portfolio-6.jpg";
 
 const portfolioImages = [
-  { src: portfolio1, alt: "Emotionale Kaffee Produktfotografie" },
-  { src: portfolio2, alt: "Lifestyle Keramik Fotografie" },
-  { src: portfolio3, alt: "Premium Skincare Produktbilder" },
-  { src: portfolio4, alt: "Moderne Tech Accessoire Fotografie" },
-  { src: portfolio5, alt: "Food Produktfotografie" },
-  { src: portfolio6, alt: "Fashion Accessoire Fotografie" },
+  { src: portfolio1, alt: "Berlin Box Produktfotografie mit emotionalem Styling" },
+  { src: portfolio2, alt: "Food Fotografie Steak auf schwarzem Schiefer" },
+  { src: portfolio3, alt: "Mililk Produktfotografie mit lifestyle Ambiente" },
+  { src: portfolio4, alt: "Amira Homes Produktfotografie mit emotionaler Inszenierung" },
+  { src: portfolio5, alt: "Babynation Lifestyle Produktfotografie Kinderzimmer" },
+  { src: portfolio6, alt: "Sushi Food Fotografie mit künstlerischer Inszenierung" },
 ];
 
 const Portfolio = () => {
