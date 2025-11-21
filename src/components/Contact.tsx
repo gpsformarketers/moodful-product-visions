@@ -25,30 +25,27 @@ const Contact = () => {
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
     try {
       contactSchema.parse(formData);
       setErrors({});
       setIsSubmitting(true);
-
-      const { supabase } = await import("@/integrations/supabase/client");
-      
-      const { error } = await supabase.functions.invoke('send-contact-email', {
+      const {
+        supabase
+      } = await import("@/integrations/supabase/client");
+      const {
+        error
+      } = await supabase.functions.invoke('send-contact-email', {
         body: formData
       });
-
       if (error) {
         throw error;
       }
-
       toast({
         title: "Nachricht gesendet!",
         description: "Wir melden uns innerhalb von 24 Stunden bei dir."
       });
-      
       setFormData({
         name: "",
         email: "",
@@ -119,7 +116,8 @@ const Contact = () => {
                   <MapPin className="h-6 w-6 text-accent mb-3" />
                   <h3 className="font-semibold mb-2 text-foreground">Standort</h3>
                   <p className="text-muted-foreground">
-                    Berlin, Deutschland
+                    Kaiser-Friedrich-Straße 94
+10585 Berlin, Deutschland
                   </p>
                 </CardContent>
               </Card>
@@ -166,12 +164,7 @@ const Contact = () => {
                     {errors.message && <p className="text-sm text-destructive">{errors.message}</p>}
                   </div>
 
-                  <Button 
-                    type="submit" 
-                    size="lg" 
-                    className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
-                    disabled={isSubmitting}
-                  >
+                  <Button type="submit" size="lg" className="w-full bg-primary text-primary-foreground hover:bg-primary/90" disabled={isSubmitting}>
                     {isSubmitting ? "Wird gesendet..." : "Angebot anfordern"}
                     <Send className="ml-2 h-5 w-5" />
                   </Button>
