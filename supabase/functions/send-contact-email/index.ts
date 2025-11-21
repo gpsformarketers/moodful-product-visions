@@ -82,7 +82,7 @@ const handler = async (req: Request): Promise<Response> => {
         'Authorization': `Bearer ${RESEND_API_KEY}`,
       },
       body: JSON.stringify({
-        from: 'Moodfotografie <onboarding@resend.dev>',
+        from: 'Moodfotografie <business@moodfotografie.de>',
         to: 'business@moodfotografie.de',
         subject: `Neue Anfrage von ${name}${company ? ` (${company})` : ''}`,
         html: `
